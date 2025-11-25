@@ -1,4 +1,4 @@
-const Title = ({ title, sub }) => {
+const Title = ({ title }) => {
   return (
     <div className="flex flex-col items-center gap-5">
       <div>
