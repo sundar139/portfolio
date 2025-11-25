@@ -9,40 +9,38 @@
 #skills .scan-container {
   position: relative;
   width: 100%;
-  height: 300px;
+  height: 380px;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
 }
 
-#skills .particles-canvas {
+#skills .particles-canvas-back {
   position: absolute;
   inset: 0;
-  z-index: 9;
+  z-index: 1;
+  pointer-events: none;
+}
+
+#skills .particles-canvas-front {
+  position: absolute;
+  inset: 0;
+  z-index: 11;
   pointer-events: none;
 }
 
 #skills .beam {
   position: absolute;
-  left: 50%;
+  left: 25%;
   top: 50%;
   transform: translate(-50%, -50%);
   width: 4px;
-  height: 300px;
-  border-radius: 20px;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(255,0,255,0.95) 10%,
-    rgba(255,0,255,1) 25%,
-    rgba(0,234,255,1) 50%,
-    rgba(124,0,255,1) 75%,
-    rgba(124,0,255,0.95) 90%,
-    transparent 100%
-  );
-  box-shadow: 0 0 60px rgba(255,0,255,0.9), 0 0 140px rgba(0,234,255,0.85), 0 0 260px rgba(124,0,255,0.8), 0 0 380px rgba(255,255,255,0.55);
-  animation: none;
+  height: 360px;
+  border-radius: 9999px;
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,255,255,1) 50%, rgba(0,0,0,0) 100%);
+  box-shadow: 0 0 64px rgba(0,255,255,1), 0 0 160px rgba(0,255,255,0.95), 0 0 320px rgba(255,255,255,0.9);
+  animation: scanPulse 2.2s ease-in-out infinite;
   z-index: 10;
 }
 
@@ -84,15 +82,16 @@
 }
 
 @keyframes scanPulse {
-  0% { opacity: 0.8; transform: translate(-50%, -50%) scaleY(1); }
-  100% { opacity: 1; transform: translate(-50%, -50%) scaleY(1.1); }
+  0% { opacity: 1; transform: translate(-50%, -50%) scaleY(1); filter: brightness(1.25); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scaleY(1.18); filter: brightness(1.45); }
+  100% { opacity: 1; transform: translate(-50%, -50%) scaleY(1); filter: brightness(1.25); }
 }
 
 #skills .card-stream {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  height: 180px;
+  height: 320px;
   display: flex;
   align-items: center;
   overflow: visible;
@@ -108,8 +107,8 @@
 
 #skills .card-wrapper {
   position: relative;
-  width: 320px;
-  height: 200px;
+  width: 240px;
+  height: 320px;
   flex-shrink: 0;
 }
 
@@ -169,24 +168,10 @@
   50% { opacity: 1; }
 }
 
-#skills .scan-effect {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, transparent, rgba(255,0,255,0.35), rgba(0,234,255,0.35), transparent);
-  animation: scanEffect 0.6s ease-out;
-  pointer-events: none;
-  z-index: 5;
-}
-
-@keyframes scanEffect {
-  0%   { transform: translateX(-100%); opacity: 0; }
-  50%  { opacity: 1; }
-  100% { transform: translateX(100%); opacity: 0; }
-}
 
 @media (max-width: 768px) {
-  #skills .card-wrapper { width: 260px; height: 160px; }
-  #skills .card-stream { height: 160px; }
+  #skills .card-wrapper { width: 200px; height: 280px; }
+  #skills .card-stream { height: 280px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -194,35 +179,31 @@
   #skills .card-line { transform: none !important; }
 }
 
-/* Beam mix overrides and child overlays */
+/* Beam visual tuning */
 #skills .beam {
-  background: rgba(255,255,255,0.96) !important;
-  box-shadow: 0 0 120px rgba(255,255,255,0.98), 0 0 280px rgba(0,234,255,0.92), 0 0 480px rgba(10,100,255,0.82), 0 0 720px rgba(255,255,255,0.70) !important;
   -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
   mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
-  z-index: 100 !important;
   pointer-events: none;
 }
 
 #skills .beam::before,
 #skills .beam::after {
-  opacity: 0 !important;
-  filter: none !important;
-  background: transparent !important;
+  display: none;
 }
 
 #skills .beam * { pointer-events: none; }
+
 
 #skills .beam .beam-core {
   position: absolute;
   left: 50%;
   top: 0;
   transform: translateX(-50%);
-  width: 6px;
+  width: 10px;
   height: 100%;
   border-radius: 20px;
-  background: rgba(255,255,255,0.96);
-  box-shadow: 0 0 16px rgba(255,255,255,0.95);
+  background: rgba(255,255,255,1);
+  box-shadow: 0 0 52px rgba(255,255,255,1), 0 0 90px rgba(0,255,255,0.6);
 }
 
 #skills .beam .beam-halo-cyan {
@@ -234,8 +215,8 @@
   height: 100%;
   border-radius: 24px;
   background: rgba(0,234,255,1);
-  filter: blur(28px);
-  opacity: 0.96;
+  filter: blur(40px);
+  opacity: 1;
   mix-blend-mode: screen;
 }
 
@@ -258,12 +239,12 @@
   left: 50%;
   top: 0;
   transform: translateX(-50%);
-  width: 320px;
+  width: 440px;
   height: 100%;
-  border-radius: 160px;
+  border-radius: 220px;
   background: rgba(255,255,255,1);
-  filter: blur(120px);
-  opacity: 0.75;
+  filter: blur(180px);
+  opacity: 0.92;
   mix-blend-mode: screen;
 }
 
@@ -272,12 +253,12 @@
   left: 50%;
   top: 0;
   transform: translateX(-50%);
-  width: 520px;
+  width: 700px;
   height: 100%;
-  border-radius: 260px;
+  border-radius: 350px;
   background: rgba(255,255,255,1);
-  filter: blur(220px);
-  opacity: 0.5;
+  filter: blur(300px);
+  opacity: 0.9;
   mix-blend-mode: screen;
 }
 
@@ -293,4 +274,51 @@
   filter: blur(44px);
   opacity: 0.86;
   mix-blend-mode: screen;
+}
+#skills .beam .beam-bloom-cyan-wide {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 1600px;
+  height: 100%;
+  border-radius: 800px;
+  background: radial-gradient(circle, rgba(0,255,255,0.65), rgba(0,255,255,0.45) 35%, rgba(255,255,255,0.35) 55%, rgba(0,255,255,0.0) 80%);
+  filter: blur(420px);
+  opacity: 0.85;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%);
+}
+
+#skills .beam .beam-bloom-white-wide {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 1800px;
+  height: 100%;
+  border-radius: 900px;
+  background: radial-gradient(circle, rgba(255,255,255,0.55), rgba(255,255,255,0.35) 40%, rgba(255,255,255,0.0) 75%);
+  filter: blur(480px);
+  opacity: 0.75;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 32%, black 68%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 32%, black 68%, transparent 100%);
+}
+#skills .beam .beam-bloom-inner {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 28px;
+  height: 100%;
+  border-radius: 18px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,0) 100%);
+  filter: blur(16px);
+  opacity: 0.9;
+  mix-blend-mode: screen;
+  pointer-events: none;
 }
