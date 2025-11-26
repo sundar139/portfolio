@@ -45,7 +45,7 @@ const Experience = () => {
     <section
       id="experience"
       ref={sectionRef}
-      className="flex flex-col items-center justify-center md:mt-40 mt-20 section-padding scroll-mt-25"
+      className="flex flex-col items-center justify-center section-padding scroll-mt-25"
     >
       <div className="w-full h-full md:px-20 px-5">
         <Title title="Work Experience" />

@@ -448,7 +448,7 @@ const Skills = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} id="skills" className="bg-black text-white py-20 px-6 md:px-16">
+    <section ref={sectionRef} id="skills" className="section-padding">
       <div className="max-w-7xl mx-auto">
         <Title title="Core Skills" />
         <div className="scan-container">

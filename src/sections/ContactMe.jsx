@@ -39,7 +39,7 @@ const ContactMe = () => {
   };
 
   return (
-    <section id="contact" className="bg-black text-white py-20 px-6 md:px-16">
+    <section id="contact" className="section-padding">
       <div className="max-w-7xl mx-auto">
         <Title
           title="Let’s Connect!"

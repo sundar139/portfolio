@@ -67,10 +67,12 @@ const Projects = () => {
     cardRefs.current.forEach((card) => {
       if (card) {
         VanillaTilt.init(card, {
-          max: 6,
-          speed: 400,
+          max: 8,
+          speed: 300,
           glare: false,
-          scale: 1.0,
+          scale: 1.02,
+          easing: "cubic-bezier(.03,.98,.52,.99)",
+          gyroscope: true,
         });
       }
     });
@@ -92,12 +94,14 @@ const Projects = () => {
           {
             y: 0,
             opacity: 1,
-            duration: 1,
-            delay: 0.2 * (index + 1),
+            duration: 0.9,
+            delay: 0.12 * (index + 1),
+            ease: "power3.out",
+            force3D: true,
             scrollTrigger: {
               trigger: card,
               start: "top bottom-=100",
-              toggleActions: "play none none reverse",
+              toggleActions: "play none none none",
             },
           }
         );
@@ -109,7 +113,7 @@ const Projects = () => {
     <section
       id="work"
       ref={sectionRef}
-      className="app-showcase scroll-mt-12"
+      className="app-showcase section-padding scroll-mt-12"
     >
       <div className="w-full h-full md:px-20 px-5">
         <Title title="My Projects" />
@@ -119,13 +123,16 @@ const Projects = () => {
             <div
               key={index}
               ref={(el) => (cardRefs.current[index] = el)}
-              className="bg-black text-white rounded-2xl border border-white/10 shadow-xl overflow-hidden hover:border-white/20 transition"
+              className="bg-black text-white rounded-2xl border border-white/10 shadow-xl overflow-hidden hover:border-white/20 transform-gpu transition-transform duration-300 ease-out hover:scale-[1.02]"
+              style={{ willChange: "transform" }}
             >
-              <div className="p-3">
+              <div className="p-4">
                 <img
                   src={p.img}
                   alt={p.title}
-                  className="w-full h-44 object-cover rounded-xl"
+                  className="w-full h-64 md:h-72 lg:h-80 object-cover rounded-xl"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
 
