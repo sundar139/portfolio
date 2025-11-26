@@ -32,7 +32,7 @@ const Model = () => {
 
 const HeroExperience = () => {
   return (
-    <Canvas className="w-full h-[600px]" camera={{ position: [10, 5, 3], fov: 50 }}>
+    <Canvas className="w-full h-[600px]" camera={{ position: [10, 5, 3], fov: 50 }} dpr={[1, 1.5]} gl={{ antialias: false, powerPreference: 'high-performance' }}>
       <ambientLight intensity={0.8} />
       <directionalLight position={[4, 5, 3]} intensity={1.2} />
       <Model />
@@ -41,7 +41,7 @@ const HeroExperience = () => {
         minPolarAngle={Math.PI / 3.5}
         maxPolarAngle={Math.PI / 1.4}
       />
-      <Particles count = {100}/>
+      <Particles count = {80}/>
     </Canvas>
   );
 };

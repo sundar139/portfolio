@@ -1,3 +1,4 @@
+import React from "react"
 import NavBar from "./sections/NavBar"
 import Hero from "./sections/hero"
 import AboutMe from "./sections/AboutMe"

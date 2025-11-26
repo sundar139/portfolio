@@ -1,22 +1,24 @@
+import gsap from "gsap";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+
+gsap.registerPlugin(ScrollToPlugin);
+
 const Button = ({ text, className, id }) => {
   return (
     <a
       onClick={(e) => {
         e.preventDefault(); // Stop the link from jumping instantly
 
-        const target = document.getElementById(id); // Find the section with ID "counter"
-
-        // Only scroll if we found the section and an ID is passed in
-        // taht prevents the contact button from scrolling to the top
+        const target = document.getElementById(id);
         if (target && id) {
-          const offset = window.innerHeight * 0.15; // Leave a bit of space at the top
-
-          // Calculate how far down the page we need to scroll
-          const top =
-            target.getBoundingClientRect().top + window.pageYOffset - offset;
-
-          // Scroll smoothly to that position
-          window.scrollTo({ top, behavior: "smooth" });
+          const nav = document.querySelector('.navbar');
+          const offsetY = (nav ? nav.offsetHeight + 16 : window.innerHeight * 0.15);
+          gsap.killTweensOf(window);
+          gsap.to(window, {
+            duration: 0.6,
+            scrollTo: { y: target, offsetY },
+            ease: 'power3.out',
+          });
         }
       }}
       className={`${className ?? ""} cta-wrapper`} // Add base + extra class names

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Title from "/src/components/Title.jsx";
 import "../styles/skills.css";
 import appCode from "/src/App.jsx?raw";
@@ -15,6 +15,7 @@ import constantsCode from "/src/constants/index.js?raw";
 import stylesCode from "/src/index.css?raw";
 
 const Skills = () => {
+  const sectionRef = useRef(null);
   useEffect(() => {
     const cardLine = document.getElementById("skillsCardLine");
     const backCanvas = document.getElementById("skillsParticlesBack");
@@ -257,7 +258,7 @@ const Skills = () => {
       frontCanvas.height = height;
     };
     // initialize star field
-    const initStars = (count = 420) => {
+    const initStars = (count = 220) => {
       stars.length = 0;
       for (let i = 0; i < count; i++) {
         const r = 1 + Math.random() * 2.5;
@@ -289,7 +290,7 @@ const Skills = () => {
       const radius = (1.1 + Math.random() * 1.8) * boost;
       const maxDist = (intersectionBands.length ? 50 : 40) * boost;
       glimmers.push({ x, y, vx, vy, r: radius, life: 1, decay: 0.7 + Math.random() * 0.3, t: 0, startX: x, maxDist });
-      if (glimmers.length > 3500) glimmers.shift();
+      if (glimmers.length > 1200) glimmers.shift();
     };
 
     const spawnSpark = () => {
@@ -301,7 +302,7 @@ const Skills = () => {
       const radius = (0.7 + Math.random() * 1.0);
       const maxDist = (intersectionBands.length ? 35 : 28) * boost;
       sparks.push({ x, y, vx, vy, r: radius, life: 1.0, decay: 1.2 + Math.random() * 0.5, t: 0, startX: x, maxDist });
-      if (sparks.length > 3000) sparks.shift();
+      if (sparks.length > 1000) sparks.shift();
     };
 
     const drawStar = (s) => {
@@ -345,8 +346,8 @@ const Skills = () => {
       if (!ctxBack || !ctxFront) return;
       const scale = Math.min(1, Math.max(0.5, fpsAvg / 60));
       const bandActive = intersectionBands.length > 0;
-      const spawnRate = prefersReduced ? 0 : Math.floor(((bandActive ? 560 : 300) * scale) * delta);
-      const sparkRate = prefersReduced ? 0 : Math.floor(((performance.now() < scanBoostUntil ? 1100 : (bandActive ? 480 : 200)) * scale) * delta);
+      const spawnRate = prefersReduced ? 0 : Math.floor(((bandActive ? 240 : 120) * scale) * delta);
+      const sparkRate = prefersReduced ? 0 : Math.floor(((performance.now() < scanBoostUntil ? 500 : (bandActive ? 220 : 100)) * scale) * delta);
       for (let i = 0; i < spawnRate; i++) spawnGlimmer();
       for (let i = 0; i < sparkRate; i++) spawnSpark();
       ctxBack.clearRect(0, 0, width, height);
@@ -392,38 +393,62 @@ const Skills = () => {
     const onResize = () => setupCanvas();
     window.addEventListener('resize', onResize);
 
+    let running = false;
+    let rafId = 0;
+    let visible = true;
+
     const step = (ts) => {
       if (!lastTime) lastTime = ts;
       const delta = (ts - lastTime) / 1000;
       lastTime = ts;
-      position -= speed * delta;
-      const totalWidth = cardLine.scrollWidth;
-      const halfWidth = totalWidth / 2;
-      if (position <= -halfWidth) position += halfWidth;
-      cardLine.style.transform = `translateX(${position}px)`;
-      clipAccumulator += delta;
-      if (clipAccumulator >= 0.05) {
-        updateCardClipping();
-        clipAccumulator = 0;
+      if (visible) {
+        position -= speed * delta;
+        const totalWidth = cardLine.scrollWidth;
+        const halfWidth = totalWidth / 2;
+        if (position <= -halfWidth) position += halfWidth;
+        cardLine.style.transform = `translateX(${position}px)`;
+        clipAccumulator += delta;
+        if (clipAccumulator >= 0.08) {
+          updateCardClipping();
+          clipAccumulator = 0;
+        }
+        updateParticles(delta);
       }
-      updateParticles(delta);
       const fps = delta > 0 ? (1 / delta) : 60;
       fpsAvg = fpsAvg * 0.9 + fps * 0.1;
-      requestAnimationFrame(step);
+      rafId = requestAnimationFrame(step);
+    };
+    const start = () => {
+      if (running) return;
+      running = true;
+      rafId = requestAnimationFrame(step);
+    };
+    const stop = () => {
+      if (!running) return;
+      running = false;
+      cancelAnimationFrame(rafId);
     };
 
-    const raf = requestAnimationFrame(step);
+    const observer = new IntersectionObserver((entries) => {
+      const entry = entries[0];
+      visible = entry.isIntersecting;
+      if (visible) start();
+      else stop();
+    }, { threshold: 0.15 });
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    start();
     const interval = null;
 
     return () => {
-      cancelAnimationFrame(raf);
+      stop();
       if (interval) clearInterval(interval);
       window.removeEventListener('resize', onResize);
+      if (sectionRef.current) observer.disconnect();
     };
   }, []);
 
   return (
-    <section id="skills" className="bg-black text-white py-20 px-6 md:px-16">
+    <section ref={sectionRef} id="skills" className="bg-black text-white py-20 px-6 md:px-16">
       <div className="max-w-7xl mx-auto">
         <Title title="Core Skills" />
         <div className="scan-container">
