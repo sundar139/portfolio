@@ -9,7 +9,7 @@
 #skills .scan-container {
   position: relative;
   width: 100%;
-  height: 380px;
+  height: 400px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -36,11 +36,21 @@
   top: 50%;
   transform: translate(-50%, -50%);
   width: 4px;
-  height: 360px;
+  height: 380px;
   border-radius: 9999px;
-  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,255,255,1) 50%, rgba(0,0,0,0) 100%);
-  box-shadow: 0 0 64px rgba(0,255,255,1), 0 0 160px rgba(0,255,255,0.95), 0 0 320px rgba(255,255,255,0.9);
-  animation: scanPulse 2.2s ease-in-out infinite;
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 42, 107, 0) 0%,
+    rgba(10, 42, 107, 0.95) 25%,
+    rgba(255, 255, 255, 1) 50%,
+    rgba(255, 20, 147, 0.95) 75%,
+    rgba(10, 42, 107, 0) 100%
+  );
+  box-shadow:
+    0 0 80px rgba(10, 42, 107, 0.9),
+    0 0 160px rgba(255, 255, 255, 0.85),
+    0 0 240px rgba(255, 20, 147, 0.7);
+  animation: none;
   z-index: 10;
 }
 
@@ -53,14 +63,12 @@
   width: 4px;
   height: 100%;
   border-radius: 30px;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(255,0,255,1) 20%,
-    rgba(0,234,255,1) 50%,
-    rgba(124,0,255,1) 80%,
-    transparent 100%
-  );
+  background: linear-gradient(to bottom,
+      transparent 0%,
+      rgba(255, 0, 255, 1) 20%,
+      rgba(0, 234, 255, 1) 50%,
+      rgba(124, 0, 255, 1) 80%,
+      transparent 100%);
   filter: blur(18px);
   opacity: 0.9;
   pointer-events: none;
@@ -75,23 +83,37 @@
   width: 80px;
   height: 100%;
   border-radius: 40px;
-  background: radial-gradient(circle at 50% 50%, rgba(255,0,255,0.36), rgba(0,234,255,0.28) 40%, transparent 70%);
+  background: radial-gradient(circle at 50% 50%, rgba(255, 0, 255, 0.36), rgba(0, 234, 255, 0.28) 40%, transparent 70%);
   filter: blur(32px);
   opacity: 0.78;
   pointer-events: none;
 }
 
 @keyframes scanPulse {
-  0% { opacity: 1; transform: translate(-50%, -50%) scaleY(1); filter: brightness(1.25); }
-  50% { opacity: 1; transform: translate(-50%, -50%) scaleY(1.18); filter: brightness(1.45); }
-  100% { opacity: 1; transform: translate(-50%, -50%) scaleY(1); filter: brightness(1.25); }
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scaleY(1);
+    filter: brightness(1.25);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scaleY(1.18);
+    filter: brightness(1.45);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scaleY(1);
+    filter: brightness(1.25);
+  }
 }
 
 #skills .card-stream {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  height: 320px;
+  height: 360px;
   display: flex;
   align-items: center;
   overflow: visible;
@@ -103,28 +125,59 @@
   display: flex;
   gap: 60px;
   white-space: nowrap;
+  will-change: transform;
 }
 
 #skills .card-wrapper {
   position: relative;
   width: 240px;
-  height: 320px;
+  height: 360px;
   flex-shrink: 0;
 }
 
 #skills .card-normal {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: linear-gradient(
+    135deg,
+    #0a2a6b 0%,
+    #0a275f 8%,
+    #081a3d 14%,
+    #000000 30%,
+    #000000 75%,
+    #081a3d 86%,
+    #0a275f 94%,
+    #0a2a6b 100%
+  );
   color: white;
   border-radius: 12px;
+  border: 1px solid rgba(10, 42, 107, 0.9);
   padding: 20px;
   clip-path: inset(0 0 0 var(--clip-right, 0%));
-  box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.45),
+    0 0 24px rgba(10, 42, 107, 0.85),
+    0 0 60px rgba(10, 42, 107, 0.6),
+    0 0 100px rgba(10, 42, 107, 0.4),
+    inset 0 0 12px rgba(10, 42, 107, 0.5);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 8px;
   overflow: hidden;
+}
+
+#skills .card-normal::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    radial-gradient(100% 120% at 0% 0%, rgba(10, 42, 107, 0.35) 0%, rgba(10, 42, 107, 0.12) 65%, rgba(10, 42, 107, 0.06) 100%),
+    radial-gradient(100% 120% at 100% 100%, rgba(10, 42, 107, 0.33) 0%, rgba(10, 42, 107, 0.12) 65%, rgba(10, 42, 107, 0.06) 100%),
+    radial-gradient(120% 100% at 100% 0%, rgba(10, 42, 107, 0.22) 0%, rgba(10, 42, 107, 0.10) 60%, rgba(10, 42, 107, 0.05) 100%),
+    radial-gradient(120% 100% at 0% 100%, rgba(10, 42, 107, 0.22) 0%, rgba(10, 42, 107, 0.10) 60%, rgba(10, 42, 107, 0.05) 100%);
+  pointer-events: none;
 }
 
 #skills .card-code {
@@ -143,7 +196,7 @@
   font-size: 12px;
   line-height: 14px;
   letter-spacing: -0.15px;
-  color: rgba(220,210,255,0.75);
+  color: rgba(220, 210, 255, 0.75);
   white-space: pre-wrap;
   word-break: break-word;
   width: 100%;
@@ -156,27 +209,46 @@
 
 #skills .code-content .code-char {
   display: inline-block;
-  color: rgba(255,255,255,0.95);
-  text-shadow: 0 0 5px rgba(255,255,255,0.75), 0 0 10px rgba(255,255,255,0.55);
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.75), 0 0 10px rgba(255, 255, 255, 0.55);
   animation: codeFlicker 2.4s ease-in-out infinite;
   animation-delay: var(--d);
   will-change: opacity, filter;
 }
 
 @keyframes codeFlicker {
-  0%, 100% { opacity: 0.9; filter: drop-shadow(0 0 1px rgba(255,255,255,0.45)); }
-  50% { opacity: 1; }
+
+  0%,
+  100% {
+    opacity: 0.9;
+    filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.45));
+  }
+
+  50% {
+    opacity: 1;
+  }
 }
 
 
 @media (max-width: 768px) {
-  #skills .card-wrapper { width: 200px; height: 280px; }
-  #skills .card-stream { height: 280px; }
+  #skills .card-wrapper {
+    width: 200px;
+    height: 320px;
+  }
+
+  #skills .card-stream {
+    height: 320px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  #skills .beam { animation: none; }
-  #skills .card-line { transform: none !important; }
+  #skills .beam {
+    animation: none;
+  }
+
+  #skills .card-line {
+    transform: none !important;
+  }
 }
 
 /* Beam visual tuning */
@@ -191,7 +263,9 @@
   display: none;
 }
 
-#skills .beam * { pointer-events: none; }
+#skills .beam * {
+  pointer-events: none;
+}
 
 
 #skills .beam .beam-core {
@@ -202,8 +276,16 @@
   width: 10px;
   height: 100%;
   border-radius: 20px;
-  background: rgba(255,255,255,1);
-  box-shadow: 0 0 52px rgba(255,255,255,1), 0 0 90px rgba(0,255,255,0.6);
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 42, 107, 0.9) 0%,
+    rgba(255, 255, 255, 1) 50%,
+    rgba(139, 92, 246, 0.9) 100%
+  );
+  box-shadow:
+    0 0 60px rgba(255, 255, 255, 0.9),
+    0 0 110px rgba(10, 42, 107, 0.85),
+    0 0 160px rgba(139, 92, 246, 0.7);
 }
 
 #skills .beam .beam-halo-cyan {
@@ -214,7 +296,7 @@
   width: 6px;
   height: 100%;
   border-radius: 24px;
-  background: rgba(0,234,255,1);
+  background: rgba(10, 42, 107, 1);
   filter: blur(40px);
   opacity: 1;
   mix-blend-mode: screen;
@@ -228,7 +310,7 @@
   width: 14px;
   height: 100%;
   border-radius: 26px;
-  background: rgba(255,20,147,1);
+  background: rgba(139, 92, 246, 1);
   filter: blur(32px);
   opacity: 0.86;
   mix-blend-mode: screen;
@@ -239,12 +321,12 @@
   left: 50%;
   top: 0;
   transform: translateX(-50%);
-  width: 440px;
+  width: 320px;
   height: 100%;
   border-radius: 220px;
-  background: rgba(255,255,255,1);
-  filter: blur(180px);
-  opacity: 0.92;
+  background: rgba(255, 255, 255, 1);
+  filter: blur(110px);
+  opacity: 0.12;
   mix-blend-mode: screen;
 }
 
@@ -253,12 +335,12 @@
   left: 50%;
   top: 0;
   transform: translateX(-50%);
-  width: 700px;
+  width: 560px;
   height: 100%;
   border-radius: 350px;
-  background: rgba(255,255,255,1);
-  filter: blur(300px);
-  opacity: 0.9;
+  background: rgba(255, 255, 255, 1);
+  filter: blur(180px);
+  opacity: 0.08;
   mix-blend-mode: screen;
 }
 
@@ -270,11 +352,12 @@
   width: 80px;
   height: 100%;
   border-radius: 40px;
-  background: rgba(10,100,255,1);
+  background: rgba(10, 42, 107, 1);
   filter: blur(44px);
   opacity: 0.86;
   mix-blend-mode: screen;
 }
+
 #skills .beam .beam-bloom-cyan-wide {
   position: absolute;
   left: 50%;
@@ -283,7 +366,7 @@
   width: 1600px;
   height: 100%;
   border-radius: 800px;
-  background: radial-gradient(circle, rgba(0,255,255,0.65), rgba(0,255,255,0.45) 35%, rgba(255,255,255,0.35) 55%, rgba(0,255,255,0.0) 80%);
+  background: radial-gradient(circle, rgba(10, 42, 107, 0.65), rgba(10, 42, 107, 0.45) 35%, rgba(255, 255, 255, 0.35) 55%, rgba(10, 42, 107, 0.0) 80%);
   filter: blur(420px);
   opacity: 0.85;
   mix-blend-mode: screen;
@@ -300,14 +383,15 @@
   width: 1800px;
   height: 100%;
   border-radius: 900px;
-  background: radial-gradient(circle, rgba(255,255,255,0.55), rgba(255,255,255,0.35) 40%, rgba(255,255,255,0.0) 75%);
-  filter: blur(480px);
-  opacity: 0.75;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.35) 40%, rgba(255, 255, 255, 0.0) 75%);
+  filter: blur(360px);
+  opacity: 0.25;
   mix-blend-mode: screen;
   pointer-events: none;
   -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 32%, black 68%, transparent 100%);
   mask-image: linear-gradient(to bottom, transparent 0%, black 32%, black 68%, transparent 100%);
 }
+
 #skills .beam .beam-bloom-inner {
   position: absolute;
   left: 50%;
@@ -316,9 +400,56 @@
   width: 28px;
   height: 100%;
   border-radius: 18px;
-  background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,0) 100%);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0) 100%);
   filter: blur(16px);
   opacity: 0.9;
   mix-blend-mode: screen;
   pointer-events: none;
+}
+
+/* Electric styles removed per request: cards rendered as normal */
+
+/* Removed scroll container to show content without inner scrolling */
+
+#skills .card-heading {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+#skills .card-subheading {
+  margin-top: 6px;
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+/* Removed fade hint at bottom of card */
+
+#skills .pill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+  margin-top: 10px;
+}
+
+#skills .pill {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  font-size: 12px;
+  line-height: 1;
+  white-space: nowrap;
+}
+#skills .card-heading-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#skills .card-icon svg {
+  display: block;
+  stroke: #ffffff;
 }

@@ -23,12 +23,85 @@ const Skills = () => {
     if (!cardLine || !backCanvas || !frontCanvas || !container) return;
 
     const skills = [
-      { title: "Data Analysis", description: "Pandas, NumPy, visualization" },
-      { title: "Data Science", description: "Scikit-Learn, TensorFlow, PyTorch" },
-      { title: "AI & LLMs", description: "GPT, BERT, RAG pipelines" },
-      { title: "MLOps", description: "AWS, Docker, Kubernetes, MLflow" },
-      { title: "Databases", description: "SQL, NoSQL, Big Data" },
-      { title: "Dev Tools", description: "Git, CI/CD, Streamlit" },
+      {
+        html: `
+            <div class="card-heading"><span class="card-heading-row"><span class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M8 5c-2 0-3.5 1.6-3.5 3.5 0 .6.1 1.1.4 1.6C3.9 10.6 3 11.8 3 13.2c0 2.1 1.8 3.8 3.9 3.8H9a3 3 0 0 0 3 3 3 3 0 0 0 3-3h2.1c2.2 0 3.9-1.7 3.9-3.8 0-1.4-.9-2.6-1.9-3.1.3-.5.4-1 .4-1.6C19.5 6.6 18 5 16 5c-.7 0-1.3.2-1.9.5C13.4 4 12.3 3 10.9 3s-2.5 1-3.2 2.5C7.3 5.2 6.7 5 6 5z"></path><path d="M12 7v8"></path><path d="M10 10.5h4"></path></svg></span><span>AI & Machine Learning</span></span></div>
+            <div class="pill-list">
+              <span class="pill">TensorFlow</span>
+              <span class="pill">PyTorch</span>
+              <span class="pill">Keras</span>
+              <span class="pill">Scikit-learn</span>
+              <span class="pill">XGBoost</span>
+              <span class="pill">Transformers (BERT, T5, RoBERTa)</span>
+              <span class="pill">LLMs (GPT-2, 3.5)</span>
+              <span class="pill">SpaCy/NLTK</span>
+              <span class="pill">OpenCV</span>
+              <span class="pill">Sequence Modeling</span>
+              <span class="pill">Multi-label Classification</span>
+            </div>
+        `,
+      },
+      {
+        html: `
+            <div class="card-heading"><span class="card-heading-row"><span class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#FF8C00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path><path d="M12 14v4"></path><path d="M12 22v-4"></path></svg></span><span>Data Engineering</span></span></div>
+            <div class="pill-list">
+              <span class="pill">Apache Airflow</span>
+              <span class="pill">Docker</span>
+              <span class="pill">DBT</span>
+              <span class="pill">CI/CD Pipelines</span>
+              <span class="pill">PySpark</span>
+              <span class="pill">Databricks</span>
+              <span class="pill">Delta Lake</span>
+              <span class="pill">Hadoop/HDFS</span>
+              <span class="pill">MapReduce</span>
+              <span class="pill">AWS (S3, RDS, Lambda)</span>
+              <span class="pill">Snowflake</span>
+              <span class="pill">PostgreSQL</span>
+              <span class="pill">MongoDB</span>
+            </div>
+        `,
+      },
+      {
+        html: `
+            <div class="card-heading"><span class="card-heading-row"><span class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#FF8C00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline><line x1="12" y1="22" x2="12" y2="2"></line></svg></span><span>Software Engineering</span></span></div>
+            <div class="pill-list">
+              <span class="pill">Python</span>
+              <span class="pill">TypeScript/JS</span>
+              <span class="pill">SQL</span>
+              <span class="pill">R</span>
+              <span class="pill">C++</span>
+              <span class="pill">FastAPI</span>
+              <span class="pill">Next.js</span>
+              <span class="pill">Streamlit</span>
+              <span class="pill">Microservices</span>
+              <span class="pill">REST APIs</span>
+              <span class="pill">Kubernetes</span>
+              <span class="pill">GitHub Actions</span>
+              <span class="pill">Linux/CUDA</span>
+              <span class="pill">Git</span>
+              <span class="pill">VSCode</span>
+            </div>
+        `,
+      },
+      {
+        html: `
+            <div class="card-heading"><span class="card-heading-row"><span class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M4 18h16"></path><path d="M4 18V6"></path><polyline points="5 14 9 11 12 13 16 9 20 12"></polyline></svg></span><span>Data Analytics</span></span></div>
+            <div class="pill-list">
+              <span class="pill">Power BI</span>
+              <span class="pill">Tableau</span>
+              <span class="pill">Plotly</span>
+              <span class="pill">Seaborn</span>
+              <span class="pill">Matplotlib</span>
+              <span class="pill">Pandas</span>
+              <span class="pill">NumPy</span>
+              <span class="pill">SciPy</span>
+              <span class="pill">Statistical Modeling</span>
+              <span class="pill">Time-Series Analysis</span>
+              <span class="pill">Feature Engineering</span>
+              <span class="pill">Large-scale Cleaning</span>
+            </div>
+        `,
+      },
     ];
 
     const projectCodes = [
@@ -83,10 +156,14 @@ const Skills = () => {
 
       const normal = document.createElement("div");
       normal.className = "card card-normal";
-      normal.innerHTML = `
-        <div class="card-title">${skill.title}</div>
-        <div class="card-description">${skill.description}</div>
-      `;
+      if (skill.html) {
+        normal.innerHTML = skill.html;
+      } else {
+        normal.innerHTML = `
+          <div class="card-title">${skill.title}</div>
+          <div class="card-description">${skill.description}</div>
+        `;
+      }
 
       const code = document.createElement("div");
       code.className = "card card-code";
@@ -168,6 +245,7 @@ const Skills = () => {
     const sparks = [];
     let fpsAvg = 60;
 
+    const glowColor = { r: 10, g: 42, b: 107 }; // match card border glow
     const setupCanvas = () => {
       ctxBack = backCanvas.getContext('2d');
       ctxFront = frontCanvas.getContext('2d');
@@ -241,10 +319,9 @@ const Skills = () => {
       const g = ctxFront.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
       const sinAlpha = 0.5 + 0.5 * Math.sin(p.t * 6);
       const a = Math.max(0, Math.min(1, sinAlpha * p.life));
-      g.addColorStop(0, `rgba(255,255,255,${a})`);
-      g.addColorStop(0.5, `rgba(196,181,253,${0.8 * a})`);
-      g.addColorStop(0.85, `rgba(139,92,246,${0.4 * a})`);
-      g.addColorStop(1, `rgba(139,92,246,0)`);
+      g.addColorStop(0, `rgba(${glowColor.r},${glowColor.g},${glowColor.b},${0.95 * a})`);
+      g.addColorStop(0.6, `rgba(${glowColor.r},${glowColor.g},${glowColor.b},${0.6 * a})`);
+      g.addColorStop(1, `rgba(${glowColor.r},${glowColor.g},${glowColor.b},0)`);
       ctxFront.fillStyle = g;
       ctxFront.beginPath();
       ctxFront.arc(p.x, p.y, p.r, 0, Math.PI * 2);
@@ -255,9 +332,9 @@ const Skills = () => {
       const g = ctxFront.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
       const sinAlpha = 0.5 + 0.5 * Math.sin(p.t * 10);
       const a = Math.max(0, Math.min(1, sinAlpha * p.life));
-      g.addColorStop(0, `rgba(255,255,255,${a})`);
-      g.addColorStop(0.6, `rgba(196,181,253,${0.9 * a})`);
-      g.addColorStop(1, `rgba(139,92,246,0)`);
+      g.addColorStop(0, `rgba(${glowColor.r},${glowColor.g},${glowColor.b},${0.95 * a})`);
+      g.addColorStop(0.65, `rgba(${glowColor.r},${glowColor.g},${glowColor.b},${0.7 * a})`);
+      g.addColorStop(1, `rgba(${glowColor.r},${glowColor.g},${glowColor.b},0)`);
       ctxFront.fillStyle = g;
       ctxFront.beginPath();
       ctxFront.arc(p.x, p.y, p.r, 0, Math.PI * 2);
@@ -321,7 +398,8 @@ const Skills = () => {
       lastTime = ts;
       position -= speed * delta;
       const totalWidth = cardLine.scrollWidth;
-      if (position <= -totalWidth / 2) position = 0;
+      const halfWidth = totalWidth / 2;
+      if (position <= -halfWidth) position += halfWidth;
       cardLine.style.transform = `translateX(${position}px)`;
       clipAccumulator += delta;
       if (clipAccumulator >= 0.05) {
