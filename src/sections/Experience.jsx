@@ -51,9 +51,9 @@ const Experience = () => {
         <Title title="Work Experience" />
 
         <div className="mt-20 flex flex-col gap-10">
-          <div className="flex w-full gap-4 items-center">
-            <div className="w-[5%] hidden md:flex justify-center">
-              <div className="w-1 h-100 rounded-full gradient-waterfall" />
+          <div className="flex w-full gap-4 items-stretch">
+            <div className="w-[5%] hidden md:flex items-stretch justify-center">
+              <div className="w-1 h-full rounded-full gradient-waterfall" />
             </div>
 
             <div className="w-full md:w-[95%]">
@@ -84,9 +84,12 @@ const Experience = () => {
               </p>
               <ul className="list-disc ms-5 mt-2 flex flex-col gap-2 text-white text-justify">
                 {[
-                  "Developed a validation pipeline to extract and annotate 2,750 user posts from ReachOut mental health forums. Implemented data cleaning, lemmatization, and privacy-preserving techniques. Built a composite model combining CNN, BiLSTM, and multi-head attention for multi-label classification of mental health disorders. Used BERT-based models for post summarization, evaluated with ROUGE scores, and optimized for scalability.",
-                  "Designed a text processing pipeline to analyze EHR data related to suicide attempts and ideation. Preprocessed medical texts by cleaning and formatting complex structures. Applied keyword-based methods to extract relevant sentences and trained a transformer-based binary classifier, achieving 82% accuracy. Generated a labeled dataset of 16,280 sentences for future research.",
-                  "Built a Python tool to scrape and analyze mental health app data from the Google Play Store. Extracted app details, tags, ratings, and user reviews, and automated the storage of collected data into text files for analysis and record-keeping.",
+                  "Extracting & Annotating Mental‑Health Forum Posts: Led the creation of a comprehensive validation pipeline to ingest and prepare 2 750 user posts from ReachOut forums. Cleaned over 3.3 million tokens of free‑text by removing identifiers, standardizing format and applying lemmatization, providing a secure, high‑quality foundation for mental‑health research.",
+                  "Multi‑Label Classification of Forum Posts: Designed and deployed a composite neural network combining convolutional layers, bidirectional LSTMs and multi‑head attention to identify multiple mental‑health disorders within user posts. Manually annotated the training data and applied binary classifiers with ensemble methods, which improved multi‑label classification accuracy and enabled reliable tagging of posts.",
+                  "Summarisation & Model Evaluation: Integrated BERT‑based models to generate concise summaries of lengthy forum posts. Evaluated summary quality with ROUGE metrics and optimized the process for scalability, ensuring coherent outputs and efficient inference for large datasets.",
+                  "EHR Text Processing for Suicide Detection: Built a multi‑stage text‑processing pipeline to extract and normalize Electronic Health Records related to suicide attempts and ideation. Developed robust preprocessing routines to handle messy medical text, including splitting numbered lists and resolving line breaks, enabling accurate sentence extraction without pre‑trained models.",
+                  "Classification & Dataset Creation: Developed a multi‑layer transformer‑based binary classifier that achieved 82 % accuracy in predicting suicide attempt or ideation labels. As a result, produced a curated dataset of 16 280 labelled sentences with ground truth annotations, supporting ongoing research into suicide‑related language.",
+                  "Mental‑Health App Scraping Tool: Created a Python utility to scrape the Google Play Store for mental‑health apps, capturing metadata, ratings and user reviews. Automated the storage of extracted data to text files, laying the groundwork for subsequent analysis of app efficacy and user sentiment.",
                 ].map((text, i) => (
                   <li
                     key={i}

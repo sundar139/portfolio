@@ -20,11 +20,14 @@ const Skills = () => {
     const cardLine = document.getElementById("skillsCardLine");
     const backCanvas = document.getElementById("skillsParticlesBack");
     const frontCanvas = document.getElementById("skillsParticlesFront");
+    const cardStream = document.getElementById("skillsCardStream");
     const container = backCanvas?.parentElement;
-    if (!cardLine || !backCanvas || !frontCanvas || !container) return;
+    if (!cardLine || !backCanvas || !frontCanvas || !container || !cardStream) return;
+    const sectionEl = sectionRef.current;
 
     const skills = [
       {
+        variant: "ai",
         html: `
             <div class="card-heading"><span class="card-heading-row"><span class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M8 5c-2 0-3.5 1.6-3.5 3.5 0 .6.1 1.1.4 1.6C3.9 10.6 3 11.8 3 13.2c0 2.1 1.8 3.8 3.9 3.8H9a3 3 0 0 0 3 3 3 3 0 0 0 3-3h2.1c2.2 0 3.9-1.7 3.9-3.8 0-1.4-.9-2.6-1.9-3.1.3-.5.4-1 .4-1.6C19.5 6.6 18 5 16 5c-.7 0-1.3.2-1.9.5C13.4 4 12.3 3 10.9 3s-2.5 1-3.2 2.5C7.3 5.2 6.7 5 6 5z"></path><path d="M12 7v8"></path><path d="M10 10.5h4"></path></svg></span><span>AI & Machine Learning</span></span></div>
             <div class="pill-list">
@@ -33,6 +36,7 @@ const Skills = () => {
               <span class="pill">Keras</span>
               <span class="pill">Scikit-learn</span>
               <span class="pill">XGBoost</span>
+              <span class="pill">MLFlow</span>
               <span class="pill">Transformers (BERT, T5, RoBERTa)</span>
               <span class="pill">LLMs (GPT-2, 3.5)</span>
               <span class="pill">SpaCy/NLTK</span>
@@ -43,8 +47,9 @@ const Skills = () => {
         `,
       },
       {
+        variant: "de",
         html: `
-            <div class="card-heading"><span class="card-heading-row"><span class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#FF8C00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path><path d="M12 14v4"></path><path d="M12 22v-4"></path></svg></span><span>Data Engineering</span></span></div>
+            <div class="card-heading"><span class="card-heading-row"><span class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path><path d="M12 14v4"></path><path d="M12 22v-4"></path></svg></span><span>Data Engineering</span></span></div>
             <div class="pill-list">
               <span class="pill">Apache Airflow</span>
               <span class="pill">Docker</span>
@@ -63,8 +68,9 @@ const Skills = () => {
         `,
       },
       {
+        variant: "se",
         html: `
-            <div class="card-heading"><span class="card-heading-row"><span class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#FF8C00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline><line x1="12" y1="22" x2="12" y2="2"></line></svg></span><span>Software Engineering</span></span></div>
+            <div class="card-heading"><span class="card-heading-row"><span class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline><line x1="12" y1="22" x2="12" y2="2"></line></svg></span><span>Software Engineering</span></span></div>
             <div class="pill-list">
               <span class="pill">Python</span>
               <span class="pill">TypeScript/JS</span>
@@ -85,6 +91,7 @@ const Skills = () => {
         `,
       },
       {
+        variant: "da",
         html: `
             <div class="card-heading"><span class="card-heading-row"><span class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M4 18h16"></path><path d="M4 18V6"></path><polyline points="5 14 9 11 12 13 16 9 20 12"></polyline></svg></span><span>Data Analytics</span></span></div>
             <div class="pill-list">
@@ -138,7 +145,12 @@ const Skills = () => {
       return html;
     };
 
-    const speed = 80;
+    let baseSpeed = 80;
+    let directionSign = 1;
+    let currentSpeed = 80;
+    const easeFactor = 0.04;
+    let sequenceWidth = 0;
+    let sequencesCount = 0;
     let position = 0;
     let lastTime = 0;
     let clipAccumulator = 0;
@@ -154,6 +166,7 @@ const Skills = () => {
     const createCardWrapper = (skill) => {
       const wrapper = document.createElement("div");
       wrapper.className = "card-wrapper";
+      if (skill.variant) wrapper.setAttribute("data-variant", skill.variant);
 
       const normal = document.createElement("div");
       normal.className = "card card-normal";
@@ -230,11 +243,38 @@ const Skills = () => {
       }
     };
 
-    const allSkills = skills.concat(skills);
+    const addSequence = () => {
+      skills.forEach((s) => cardLine.appendChild(createCardWrapper(s)));
+      sequencesCount = Math.max(1, Math.floor(cardLine.children.length / skills.length));
+      if (cardLine.children.length >= skills.length * 2) {
+        const firstA = cardLine.children[0];
+        const firstB = cardLine.children[skills.length];
+        if (firstA && firstB) {
+          const aLeft = firstA.offsetLeft;
+          const bLeft = firstB.offsetLeft;
+          sequenceWidth = Math.max(1, bLeft - aLeft);
+        }
+      } else {
+        sequenceWidth = cardLine.scrollWidth / sequencesCount;
+      }
+    };
     cardLine.innerHTML = "";
-    allSkills.forEach((s) => cardLine.appendChild(createCardWrapper(s)));
+    addSequence();
+    while (cardLine.scrollWidth < container.clientWidth + sequenceWidth * 2) {
+      addSequence();
+    }
 
     const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const streamStyles = getComputedStyle(cardStream);
+    const varSpeed = parseFloat(streamStyles.getPropertyValue('--scroll-speed'));
+    const varDir = parseFloat(streamStyles.getPropertyValue('--scroll-direction'));
+    const attrSpeed = parseFloat(cardStream.getAttribute('data-scroll-speed') || '');
+    const attrDir = parseFloat(cardStream.getAttribute('data-scroll-dir') || '');
+    if (!Number.isNaN(varSpeed)) baseSpeed = varSpeed;
+    if (!Number.isNaN(attrSpeed)) baseSpeed = attrSpeed;
+    if (!Number.isNaN(varDir)) directionSign = Math.sign(varDir) || 1;
+    if (!Number.isNaN(attrDir)) directionSign = Math.sign(attrDir) || directionSign;
+    currentSpeed = baseSpeed;
 
     // particle systems
     let ctxBack = null;
@@ -246,7 +286,7 @@ const Skills = () => {
     const sparks = [];
     let fpsAvg = 60;
 
-    const glowColor = { r: 10, g: 42, b: 107 }; // match card border glow
+    const glowColor = { r: 139, g: 92, b: 246 }; // match unified card accent (violet)
     const setupCanvas = () => {
       ctxBack = backCanvas.getContext('2d');
       ctxFront = frontCanvas.getContext('2d');
@@ -320,8 +360,8 @@ const Skills = () => {
       const g = ctxFront.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
       const sinAlpha = 0.5 + 0.5 * Math.sin(p.t * 6);
       const a = Math.max(0, Math.min(1, sinAlpha * p.life));
-      g.addColorStop(0, `rgba(${glowColor.r},${glowColor.g},${glowColor.b},${0.95 * a})`);
-      g.addColorStop(0.6, `rgba(${glowColor.r},${glowColor.g},${glowColor.b},${0.6 * a})`);
+      g.addColorStop(0, `rgba(${glowColor.r},${glowColor.g},${glowColor.b},${0.65 * a})`);
+      g.addColorStop(0.6, `rgba(${glowColor.r},${glowColor.g},${glowColor.b},${0.35 * a})`);
       g.addColorStop(1, `rgba(${glowColor.r},${glowColor.g},${glowColor.b},0)`);
       ctxFront.fillStyle = g;
       ctxFront.beginPath();
@@ -333,8 +373,8 @@ const Skills = () => {
       const g = ctxFront.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
       const sinAlpha = 0.5 + 0.5 * Math.sin(p.t * 10);
       const a = Math.max(0, Math.min(1, sinAlpha * p.life));
-      g.addColorStop(0, `rgba(${glowColor.r},${glowColor.g},${glowColor.b},${0.95 * a})`);
-      g.addColorStop(0.65, `rgba(${glowColor.r},${glowColor.g},${glowColor.b},${0.7 * a})`);
+      g.addColorStop(0, `rgba(${glowColor.r},${glowColor.g},${glowColor.b},${0.75 * a})`);
+      g.addColorStop(0.65, `rgba(${glowColor.r},${glowColor.g},${glowColor.b},${0.5 * a})`);
       g.addColorStop(1, `rgba(${glowColor.r},${glowColor.g},${glowColor.b},0)`);
       ctxFront.fillStyle = g;
       ctxFront.beginPath();
@@ -399,16 +439,23 @@ const Skills = () => {
 
     const step = (ts) => {
       if (!lastTime) lastTime = ts;
-      const delta = (ts - lastTime) / 1000;
+      const raw = (ts - lastTime) / 1000;
+      const delta = Math.min(raw, 1 / 60);
       lastTime = ts;
       if (visible) {
-        position -= speed * delta;
-        const totalWidth = cardLine.scrollWidth;
-        const halfWidth = totalWidth / 2;
-        if (position <= -halfWidth) position += halfWidth;
-        cardLine.style.transform = `translateX(${position}px)`;
+        const targetSpeed = prefersReduced ? 0 : baseSpeed;
+        currentSpeed += (targetSpeed - currentSpeed) * easeFactor;
+        const velocity = currentSpeed * directionSign;
+        position -= velocity * delta;
+        if (sequenceWidth <= 0) {
+          sequencesCount = Math.max(1, Math.floor(cardLine.children.length / skills.length));
+          sequenceWidth = cardLine.scrollWidth / sequencesCount;
+        }
+        const mod = sequenceWidth === 0 ? 0 : ((position % sequenceWidth) + sequenceWidth) % sequenceWidth;
+        const mapped = directionSign > 0 ? (mod - sequenceWidth) : mod;
+        cardLine.style.transform = `translate3d(${mapped}px,0,0)`;
         clipAccumulator += delta;
-        if (clipAccumulator >= 0.08) {
+        if (clipAccumulator >= 0.06) {
           updateCardClipping();
           clipAccumulator = 0;
         }
@@ -434,16 +481,26 @@ const Skills = () => {
       visible = entry.isIntersecting;
       if (visible) start();
       else stop();
-    }, { threshold: 0.15 });
-    if (sectionRef.current) observer.observe(sectionRef.current);
+    }, { threshold: 0.0, rootMargin: '50px' });
+    if (sectionEl) observer.observe(sectionEl);
     start();
     const interval = null;
+    const ro = new ResizeObserver(() => {
+      sequencesCount = Math.max(1, Math.floor(cardLine.children.length / skills.length));
+      sequenceWidth = cardLine.scrollWidth / sequencesCount;
+      while (cardLine.scrollWidth < container.clientWidth + sequenceWidth * 2) {
+        addSequence();
+      }
+    });
+    ro.observe(cardLine);
 
     return () => {
       stop();
       if (interval) clearInterval(interval);
       window.removeEventListener('resize', onResize);
-      if (sectionRef.current) observer.disconnect();
+      if (sectionEl) observer.unobserve(sectionEl);
+      observer.disconnect();
+      ro.disconnect();
     };
   }, []);
 
@@ -454,6 +511,8 @@ const Skills = () => {
         <div className="scan-container">
           <canvas className="particles-canvas-back" id="skillsParticlesBack" />
           <div className="beam">
+            <div className="beam-halo-white-inner"></div>
+            <div className="beam-bloom-white-mid"></div>
             <div className="beam-core"></div>
             <div className="beam-bloom-inner"></div>
             <div className="beam-halo-cyan"></div>
@@ -465,7 +524,7 @@ const Skills = () => {
             <div className="beam-bloom-white-wide"></div>
           </div>
           <canvas className="particles-canvas-front" id="skillsParticlesFront" />
-          <div className="card-stream" id="skillsCardStream">
+          <div className="card-stream" id="skillsCardStream" tabIndex={0} aria-label="Scrolling core skills cards">
             <div className="card-line" id="skillsCardLine" />
           </div>
         </div>

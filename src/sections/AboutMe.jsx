@@ -73,14 +73,14 @@ const AboutMe = () => {
             ref={(el) => (paragraphRefs.current[0] = el)}
             className="text-white text-sm md:text-lg leading-relaxed text-justify"
           >
-            I’m a Computer Science professional with expertise in Machine Learning, NLP, and Generative AI, focused on building intelligent, cloud-integrated solutions. My experience includes developing transformer-based chatbots, inference pipelines, and AI-powered applications using technologies like Python, TensorFlow, PyTorch, Huggingface, and Langchain. I’ve worked with LLMs such as GPT-2, GPT-3.5, BERT, RoBERTa, and Mistral, and designed Retrieval-Augmented Generation (RAG) pipelines for advanced language tasks.
+            I’m a data engineer and applied AI specialist who builds real, production-ready systems that solve messy problems end to end. I architect and implement scalable ETL/ELT pipelines, build analytical models, and apply machine learning and deep learning across domains. My academic research experience includes NLP and mental-health-oriented modeling, with presentations at KSU’s 2023 Symposium of Student Scholars and a co-authored poster at IEEE/ACM CHASE 2024. I’ve applied forecasting methods in multiple contexts, including stock price prediction in my graduate capstone, and I built a project to predict Locational Marginal Prices (LMP) in the PJM electricity market using data ingestion, feature engineering and XGBoost models, served through a FastAPI endpoint to enable real-time prediction workflows.
           </p>
 
           <p
             ref={(el) => (paragraphRefs.current[1] = el)}
             className="text-white text-sm md:text-lg leading-relaxed text-justify"
           >
-            I’m skilled in deploying AI systems using AWS services including EC2, S3, Bedrock, Lambda, and SageMaker, and managing workflows with Docker, Kubernetes, MLflow, and GitHub Actions. My strengths also include data processing with Pandas and NumPy, big data tools like Spark and Hadoop, and data visualization using Power BI, Plotly, and Seaborn. Passionate about impactful domains like health informatics and education, I aim to continue delivering scalable, real-world AI solutions.
+            On the engineering side, I specialize in building scalable data infrastructure with PySpark, Databricks, Snowflake, dbt and Airflow that transform raw data into analytics-ready formats. I’ve done everything from climate and public-data ETL pipelines to high-throughput streaming workflows and exploratory analyses across finance, healthcare, media and business datasets. My AI work spans sentiment analysis, computer vision and transformer-based NLP, and I built AssignWell, a mental-health-aware academic planner that blends user workflows with AI insights. Across research and open-source projects, I bring a rare blend of deep technical skills, product thinking and a drive to deliver solutions that matter.
           </p>
         </div>
       </div>

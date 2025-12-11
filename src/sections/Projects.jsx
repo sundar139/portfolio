@@ -13,50 +13,72 @@ const Projects = () => {
 
   const projects = [
     {
-      img: "/images/project1.png",
-      title: "Heart Attack Data Analysis",
+      img: "/images/GHCND2.jpeg",
+      title: "GHCN-D Climate Analytics ETL Pipeline",
       desc:
-        "Interactive analysis of heart health datasets with preprocessing, feature engineering, and model evaluation.",
+        "A data workflow that transforms years of climate observations into clean, structured datasets ready for analytics and modeling. It standardizes raw records, applies quality checks, and organizes outputs into layers optimized for exploration and downstream prediction tasks.",
       tags: [
-        "Python",
-        "Pandas",
-        "Sklearn",
-        "EDA",
-        "Classification",
+        "PySpark",
+        "Databricks",
+        "Delta Lake",
+        "ETL",
+        "Feature Engineering",
       ],
-      github: "https://github.com/sundar139/Heart-Attack-Data-Analysis",
+      github: "https://github.com/sundar139/GHCN-D-ETL-Project",
       live: null,
-      featured: true,
+      featured: false,
     },
     {
-      img: "/images/project2.png",
-      title: "Predicting Stocks",
+      img: "/images/PJM.png",
+      title: "PJM-LMP-Forecasting",
       desc:
-        "Deep learning models for stock price forecasting with LSTM and evaluation metrics.",
-      tags: ["Python", "TensorFlow", "LSTM", "Time Series", "Finance"],
+        "An end-to-end machine learning system that predicts Locational Marginal Prices in the PJM electricity market to support energy trading and grid management decisions. The production-grade pipeline fetches real-time data from PJM APIs, engineers temporal features including lags and rolling windows, trains regression models with experiment tracking, and serves predictions through a scalable API endpoint.",
+      tags: ["Python", "FastAPI", "XGBoost", "MLflow", "Terraform", "Docker", "AWS S3"],
       github:
-        "https://github.com/sundar139/Predicting-Stock-Prices-Using-Deep-Learning-Models",
+        "https://github.com/sundar139/PJM-LMP-Forecasting",
       live: null,
-      featured: true,
+      featured: false,
     },
     {
-      img: "/images/project3.png",
-      title: "News Sentiment Analysis",
+      img: "/images/IOWA.jpeg",
+      title: "IOWA Liquor Sales ETL Pipeline",
       desc:
-        "NLP pipeline to classify news sentiment, with vectorization and model comparisons.",
-      tags: ["NLP", "Scikit-Learn", "TF-IDF", "Classification", "Python"],
-      github: "https://github.com/sundar139/News-Sentiment-Analysis",
+        "A data pipeline that ingests millions of liquor sales records into a centralized store to support reporting and business insights. It automates end-to-end data flow, from ingestion to cleaned, analytics-ready tables, providing reliable daily updates with minimal manual effort.",
+      tags: ["Apache Airflow", "Python", "PostgreSQL", "AWS RDS", "Docker", "ETL"],
+      github: "https://github.com/sundar139/IOWA-Liquor-Sales",
       live: null,
-      featured: true,
+      featured: false,
     },
     {
-      img: "/images/project2.png",
-      title: "Pneumonia Detection",
+      img: "/images/Pixar.png",
+      title: "Pixar Analytics ELT Pipeline",
       desc:
-        "CNN-based classifier on chest X-ray images with training pipeline and evaluation.",
-      tags: ["CNN", "Keras", "Medical Imaging", "Python"],
+        "An analytics-ready data foundation for exploring movies, performance, and trends across the Pixar catalog. It centralizes raw records into a unified warehouse and applies layered transformations that make it easy for stakeholders to answer questions about revenue, franchises, and audience behavior.",
+      tags: ["Snowflake", "DBT", "SQL", "ELT"],
       github:
-        "https://github.com/sundar139/Pneumonia-Detection-Using-Deep-Learning-on-Chest-X-ray-Images",
+        "https://github.com/sundar139/Pixar_Analytics",
+      live: null,
+      featured: false,
+    },
+    {
+      img: "/images/Convex.png",
+      title: "Synthetic Vision: AI vs Human Art Classifier ",
+      desc:
+        "A visual recognition project that distinguishes AI-generated artwork from human-made pieces to support authenticity checks and research on creative patterns. It evaluates thousands of images, analyzes visual characteristics, and produces a confidence score indicating whether a piece is likely human- or machine-created.",
+      tags: ["TensorFlow", "Keras", "CNN", "OpenCV", "Binary Classification"],
+      github:
+        "https://github.com/sundar139/Synthetic-Vision-Classifying-Human-vs-AI-Generated-Art-Using-CNNs",
+      live: null,
+      featured: false,
+    },
+    {
+      img: "/images/TMDB2.jpeg",
+      title: "TMDB Movies EDA & Dashboard ",
+      desc:
+        "An end-to-end analytics project that explores decades of movie data to uncover trends in genres, ratings, and box office outcomes. It powers interactive dashboards where users can slice by time, genre, and revenue to discover hidden gems and high-performing patterns.",
+      tags: ["Python", "Pandas", "Power BI", "EDA"],
+      github:
+        "https://github.com/sundar139/TMDB-Movies-Data-Analysis",
       live: null,
       featured: false,
     },
@@ -127,13 +149,15 @@ const Projects = () => {
               style={{ willChange: "transform" }}
             >
               <div className="p-4">
-                <img
-                  src={p.img}
-                  alt={p.title}
-                  className="w-full h-64 md:h-72 lg:h-80 object-cover rounded-xl"
-                  loading="lazy"
-                  decoding="async"
-                />
+                <div className="w-full h-64 md:h-72 lg:h-80 bg-neutral-900 rounded-xl flex items-center justify-center overflow-hidden">
+                  <img
+                    src={p.img}
+                    alt={p.title}
+                    className="max-w-full max-h-full object-contain"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
               </div>
 
               <div className="px-4">
